@@ -1,6 +1,4 @@
 ﻿import React, { Component } from 'react';
-import { Listing } from './Listing';
-import { Details } from './Details';
 import '../index.css';
 
 export class EmployeeList extends Component {
@@ -11,14 +9,14 @@ export class EmployeeList extends Component {
     };
 
     componentDidMount() {
-        this.populateEmployeeListData();
+        this.populateEmployeeList();
     }
 
     render() {
         return (
             <>
                 <h1>Employees</h1>
-                <div class="listing">
+                <div className="listing">
                     <table>
                         <thead>
                             <tr>
@@ -27,22 +25,22 @@ export class EmployeeList extends Component {
                             </tr>
                         </thead>
                         <tbody>
-                            {employeeList.map(employee =>
+                            { this.state.employeeList.map(employee =>
                                 <tr key={employee.ID}>
                                     <td>{employee.Name}</td>
                                     <td>{employee.EmailDefault}</td>
                                 </tr>
                             )}
                         </tbody>
-                    </table?
+                    </table>
                 </div>
             </>
-        );˚
+        );
     }
 
     // call server for data
     async populateEmployeeList() {
-        const response = await fetch('employee');
+        const response = await fetch('employeeList');
         const data = await response.json();
         this.setState({employeeList: data, loading: false });      
     }

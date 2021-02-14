@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { HashRouter as Route, Link } from "react-router-dom";
+import { HashRouter as Router, Route, Link } from "react-router-dom";
 import { EmployeeList } from './EmployeeList';
 import { Projects } from './Projects';
 import { FetchData } from './FetchData';
@@ -16,6 +16,7 @@ export default class App extends Component {
                     <Link to="/projects">Projects</Link>
                     <Link to="/fetch-data">Fetch</Link>
                 </nav>
+
                 {/* get to and fro pages */}
                 <main>
                     <Route exact path='/' component={EmployeeList} />

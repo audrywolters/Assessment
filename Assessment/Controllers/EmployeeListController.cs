@@ -14,7 +14,7 @@ namespace Assessment.Controllers
             // initialize class to have stock employess
             // we want it to happen once
             // because users will be adding/deleting employees in front end
-            // don't want to send the original, unedited list
+            // don't want to send the original, unedited listEmp
             EmployeeList = GenerateEmployees();
         }
 
@@ -36,36 +36,39 @@ namespace Assessment.Controllers
 
         private IList<Employee> GenerateEmployees()
         {
-            // pretend this is an Employee table
-            EmployeeList.Add(new Employee
+            EmployeeList = new List<Employee>
             {
-                ID = 1, // <- Primary Key on Employees Table
-                Name = "John Smith",
-                EmailDefault = "johns@twgi.com"
-            });
+                // pretend this is an Employee table
+                new Employee
+                {
+                    ID = 1, // <- Primary Key on Employees Table
+                    Name = "John Smith",
+                    EmailDefault = "johns@twgi.com"
+                },
 
-            EmployeeList.Add(new Employee
-            {
-                ID = 2,
-                Name = "Monique Unique",
-                EmailDefault = "moniqueu@twgi.com"
-            });
+                new Employee
+                {
+                    ID = 2,
+                    Name = "Monique Unique",
+                    EmailDefault = "moniqueu@twgi.com"
+                },
 
-            EmployeeList.Add(new Employee
-            {
-                ID = 3,
-                Name = "Elmer Dicket",
-                EmailDefault = "elmerd@twgi.com"
-            });
+                new Employee
+                {
+                    ID = 3,
+                    Name = "Elmer Dicket",
+                    EmailDefault = "elmerd@twgi.com"
+                },
 
-            EmployeeList.Add(new Employee
-            {
-                ID = 4,
-                Name = "John Doe",
-                // Doug - in real life I would check w/ product owner before changing email
-                // from johnS -> johnD :0 (business card says johnS)
-                EmailDefault = "johnd@twgi.com"
-            });
+                new Employee
+                {
+                    ID = 4,
+                    Name = "John Doe",
+                    // Doug - in real life I would check w/ product owner before changing email
+                    // from johnS -> johnD :0 (business card says johnS)
+                    EmailDefault = "johnd@twgi.com"
+                }
+            };
 
             return EmployeeList;
         }
