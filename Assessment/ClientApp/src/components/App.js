@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { HashRouter as Router, Route, Link } from "react-router-dom";
-import { Layout } from './Layout';
 import { Home } from './Home';
 import { FetchData } from './FetchData';
 import { Counter } from './Counter';
