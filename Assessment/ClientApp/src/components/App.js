@@ -10,11 +10,13 @@ export default class App extends Component {
     render() {
         return (
             <>
+                {/* navigation in topmost page section */}
                 <nav>
                     <Link to="/">Employees</Link>
                     <Link to="/projects">Projects</Link>
                     <Link to="/fetch-data">Fetch</Link>
                 </nav>
+                {/* get to and fro pages */}
                 <main>
                     <Route exact path='/' component={Employees} />
                     <Route path='/projects' component={Projects} />

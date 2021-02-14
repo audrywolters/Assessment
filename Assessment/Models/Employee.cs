@@ -5,19 +5,31 @@ namespace Assessment.Models
     {
         // if there were a real database
         // ID would be the primary key
-        public int ID { get; set; }
+        public int EmployeeID { get; set; }
 
         public string Name { get; set; }
 
         public string EmailDefault { get; set; }
 
-        // would love to make this int
-        // but that would involve a chunk of time
-        // something like:
-        // public int AreaCode = 612
-        // public int Prefix = 555
-        // public int Subscriber = 1234
-        // not super necessary
-        public string PhoneDirect { get; set; }
     }
+
+    // AUDRY - extra if we get to it
+    // represents 2 tables
+    //public class Tele
+    //{
+    //    public int EmployeeID { get; set; }
+
+    //    public string TeleName { get; set; }
+
+    //    public string TeleNumber { get; set; }
+    //}
+
+    //public class Email
+    //{
+    //    public int EmployeeID { get; set; }
+
+    //    public string EmailName { get; set; }
+
+    //    public string EmailAddress { get; set; }
+    //}
 }
