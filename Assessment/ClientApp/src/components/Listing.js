@@ -1,6 +1,6 @@
 ﻿import React, { Component } from 'react';
 
-export class ItemList extends Component {
+export class Listing extends Component {
 
     state = {
         movie: [],

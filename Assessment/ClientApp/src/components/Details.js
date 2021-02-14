@@ -1,20 +1,20 @@
 ﻿import React, { Component } from 'react';
 
-export class SideView extends Component {
+export class Details extends Component {
 
     state = {
         hi: 'hihi state'
     }
 
     componentDidMount() {
-        console.log('made it to side view');
+        console.log('made it to details');
     }
 
     render() {
         return (
             <ul>
                 <li>hi</li>
-                <li>you are in side view</li>
+                <li>you are in details view</li>
                 <li>{this.state.hi}</li>
             </ul>
         );
