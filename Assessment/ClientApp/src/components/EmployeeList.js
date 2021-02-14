@@ -26,11 +26,11 @@ export class EmployeeList extends Component {
                         </thead>
                         <tbody>
                             { this.state.employeeList.map(employee =>
-                                <tr key={employee.ID}>
-                                    <td>{employee.Name}</td>
-                                    <td>{employee.EmailDefault}</td>
+                                <tr key={employee.id}>
+                                    <td>{employee.name}</td>
+                                    <td>{employee.emailDefault}</td>
                                 </tr>
-                            )}
+                            ) }
                         </tbody>
                     </table>
                 </div>
