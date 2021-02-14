@@ -3,9 +3,8 @@ namespace Assessment.Models
 {
     public class Employee
     {
-        // if there were a real database
-        // ID would be the primary key
-        public int EmployeeID { get; set; }
+        // "primary key"
+        public int ID { get; set; }
 
         public string Name { get; set; }
 
