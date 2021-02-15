@@ -5,6 +5,7 @@ export class EmployeeList extends Component {
 
     state = {
         employeeList: [],
+        employee: {},
         loading: true
     };
 
@@ -41,7 +42,13 @@ export class EmployeeList extends Component {
                     </table>
                 </div>
                 <div className="detail">
-                  tbd
+                    <ul>
+                        <li>
+                            {JSON.stringify()}</li>
+                        <li>id: {this.state.employee.id}</li>
+                        <li>name: {this.state.employee.name}</li>
+                        <li>fax: {this.state.employee.faxDefault}</li>
+                    </ul>
                 </div>  
             </>
         );
@@ -49,15 +56,18 @@ export class EmployeeList extends Component {
 
     // call server for data
     async populateEmployeeList() {
-        const response = await fetch('employeeList');
+        console.log('calling for all!...');
+        const response = await fetch(`employeeList`);
         const data = await response.json();
         this.setState({employeeList: data, loading: false });      
     }
 
     // call server for data
-    async getEmployee(employeeID) {
-        const response = await fetch('employeeList');
-        const data = await response.json();
-        this.setState({ employeeList: data, loading: false });
+    async getEmployee(id) {
+        console.log('calling for one!...', id);
+        const response = await fetch(`employeeList/${id}`);
+        const data = await response.json;
+        console.log('employee obj ', data);
+        this.setState({ employee: data, loading: false });
     }
 }
