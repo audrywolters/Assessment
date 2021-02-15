@@ -2,6 +2,7 @@
 using System.Linq;
 using Assessment.Models;
 using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json;
 
 namespace Assessment.Controllers
 {
@@ -39,20 +40,43 @@ namespace Assessment.Controllers
             return employee;
         }
 
-        [HttpPut("{employee}")]
-        public IList<Employee> EditEmployee(Employee employee)
+        [HttpPost("{employee}")]
+        public IList<Employee> AddNewEmployeeData(string jsonEmployee)
         {
-            // UPDATE Employees
-            // SET Name = @name, ... 
-            // WHERE ID = @id
+            // turn json string into C# object
+            Employee newEmployee = JsonConvert.DeserializeObject<Employee>(jsonEmployee);
 
-            Employee employeeToEdit = EmployeeList.FirstOrDefault(e => e.ID == employee.ID);
+            // look to see if we are updating or creating
+            Employee foundEmployee = EmployeeList.FirstOrDefault(e => e.ID == newEmployee.ID);
+            if (foundEmployee == null)
+            {
+                // we are creating
+                EmployeeList.Add(newEmployee);
+            }
+            else
+            {
+                // we're updating so replace
+                EmployeeList.Remove(foundEmployee);
+                EmployeeList.Add(newEmployee);
+            }
 
-            // AUDRY - fix
-            //employeeToEdit = employee;
-
-            return null;
+            return EmployeeList;
         }
+
+        //[HttpPut("{employee}")]
+        //public IList<Employee> EditEmployee(Employee employee)
+        //{
+        //    // UPDATE Employees
+        //    // SET Name = @name, ... 
+        //    // WHERE ID = @id
+
+        //    Employee employeeToEdit = EmployeeList.FirstOrDefault(e => e.ID == employee.ID);
+
+        //    // AUDRY - fix
+        //    //employeeToEdit = employee;
+
+        //    return null;
+        //}
 
         [HttpDelete("{id}")]
         public IList<Employee> DeleteEmploye(int id)
