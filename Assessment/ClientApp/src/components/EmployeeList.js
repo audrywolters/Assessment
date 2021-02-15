@@ -33,6 +33,10 @@ export class EmployeeList extends Component {
         this.setState({ employee: e })
     }
 
+    deleteEmployee(e) {
+
+    }
+
 
     //disableNoNoEdit() {
 
@@ -71,10 +75,12 @@ export class EmployeeList extends Component {
                         </thead>
                         <tbody>
                             {this.state.employeeList.map(e =>
-                                <tr key={e.id} onClick={() => this.setEmployee(e)}>
+                                <tr key={e.id}>
                                     <td>{e.name}</td>
                                     <td>{e.emailDefault}</td>
                                     <td>{e.phoneDirect}</td>
+                            <td><button onClick={() => this.setEmployee(e)}>Edit</button></td>
+                                    <td><button onClick={() => this.deleteEmployee(e)}>Delete</button></td>
                                 </tr>
                             ) }
                         </tbody>
@@ -83,28 +89,22 @@ export class EmployeeList extends Component {
 
                 <div className="detail">
                     <div className="detailHeader">
-
                         <span>Employee</span>
-                        { /* Not Working! has to do with this   button onClick={this.toggleEditMode}>Edit</button> */}
-                        <button>Edit</button>
-
-                        { /* editClicked, enable, click, save successful, disable */}
                         <button>Save</button>
-                        <button>Delete</button>
-
-                        { /* fudge - not clearing if empty */ }
-                        <ul>
-                            <li><label>Name:</label>        <input type="text" value={this.state.employee.name} /></li>
-                            <li><label>Direct:</label>      <input type="text" value={this.state.employee.phoneDirect} /></li>
-                            <li><label>Cell:</label>        <input type="text" value={this.state.employee.phoneCell} /></li>
-                            <li><label>Home:</label>        <input type="text" value={this.state.employee.phoneHome} /></li>
-                            <li><label>Fax:</label>         <input type="text" value={this.state.employee.faxDefault} /></li>
-                            <li><label>Home Fax:</label>    <input type="text" value={this.state.employee.faxHome} /></li>
-                            <li><label>Email:</label>       <input type="text" value={this.state.employee.emailDefault} /></li>
-                            <li><label>Email Home:</label>  <input type="text" value={this.state.employee.emailHome} /></li>
-                            <li><label>Is Active:</label>   <input type="checkbox" checked={this.state.employee.isActive} /></li>
-                        </ul>
+                        <button>New</button>
                     </div>
+
+                    <ul>
+                        <li><label>Name:</label>        <input type="text" value={this.state.employee.name} /></li>
+                        <li><label>Direct:</label>      <input type="text" value={this.state.employee.phoneDirect} /></li>
+                        <li><label>Cell:</label>        <input type="text" value={this.state.employee.phoneCell} /></li>
+                        <li><label>Home:</label>        <input type="text" value={this.state.employee.phoneHome} /></li>
+                        <li><label>Fax:</label>         <input type="text" value={this.state.employee.faxDefault} /></li>
+                        <li><label>Home Fax:</label>    <input type="text" value={this.state.employee.faxHome} /></li>
+                        <li><label>Email:</label>       <input type="text" value={this.state.employee.emailDefault} /></li>
+                        <li><label>Email Home:</label>  <input type="text" value={this.state.employee.emailHome} /></li>
+                        <li><label>Is Active:</label>   <input type="checkbox" checked={this.state.employee.isActive} /></li>
+                    </ul>
                 </div>   
             </>
         );
