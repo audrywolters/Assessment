@@ -20,6 +20,8 @@ namespace Assessment.Models
         // pretend this is the Project Table
         public static IList<Project> GenerateProjects()
         {
+            Console.Write("in generate projects");
+
             return new List<Project>
             {
                 new Project

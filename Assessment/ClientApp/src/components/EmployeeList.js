@@ -51,8 +51,6 @@ export class EmployeeList extends Component {
     render() {
         return (
             <>
-                {JSON.stringify(this.state.employee)}
-
                 <h1>Employees</h1>
                 <div className="listing">
                     <table>

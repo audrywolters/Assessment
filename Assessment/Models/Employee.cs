@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 namespace Assessment.Models
 {
@@ -34,6 +35,8 @@ namespace Assessment.Models
         // pretend this is the Employee Table
         public static IList<Employee> GenerateEmployees()
         {
+            Console.Write("in generate employees");
+
             return new List<Employee>
             {
                 new Employee
@@ -83,6 +86,7 @@ namespace Assessment.Models
                     Title = "AIA"
                 }
             };
+
         }
     }
 
