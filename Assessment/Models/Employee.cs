@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 
 namespace Assessment.Models
 {
@@ -8,60 +7,78 @@ namespace Assessment.Models
         // "primary key"
         public int ID { get; set; }
 
-        public string Name { get; set; }
-
         public string EmailDefault { get; set; }
 
-        public string PhoneNumberDirect { get; set; }
+        public string EmailHome { get; set; }
 
         public string FaxDefault { get; set; }
 
-        // AUDRY - move to Model
+        // ideally it would be nice to have seperate
+        // tele and email tables - clearers/safer
+        // and would allow user to create custom contact types
+        // i.e. "Landline: 612-555-0000" 
+        public string FaxHome { get; set; }
+
+        public string IsActive { get; set; }
+
+        public string PhoneCell { get; set; }
+
+        public string PhoneDirect { get; set; }
+
+        public string PhoneHome { get; set; }
+
+        public string Name { get; set; }
+
+        public string Title { get; set; }
+
+        // pretend this is the Employee Table
         public static IList<Employee> GenerateEmployees()
         {
             return new List<Employee>
             {
-                // pretend this is the Employee table
                 new Employee
                 {
-                    ID = 1, // <- Primary Key on Employees Table
-                    Name = "John Smith",
+                    ID = 1,
                     EmailDefault = "johns@twgi.com",
-                    PhoneNumberDirect = "612-555-1234",
-                    FaxDefault = "612-555-4321"
+                    FaxDefault = "612-555-4321",
+                    Name = "John Smith",
+                    PhoneDirect = "612-555-1234",
+                    Title = "AIA"
                 },
 
                 new Employee
                 {
                     ID = 2,
-                    Name = "Monique Unique",
                     EmailDefault = "moniqueu@twgi.com",
-                    PhoneNumberDirect = "612-555-1235",
-                    FaxDefault = "612-555-5321"
+                    FaxDefault = "612-555-5321",
+                    Name = "Monique Unique",
+                    PhoneDirect = "612-555-1235",
+                    Title = "CIC"
                 },
 
                 new Employee
                 {
                     ID = 3,
-                    Name = "Elmer Dickett",
                     EmailDefault = "elmerd@twgi.com",
-                    PhoneNumberDirect = "612-555-1236",
-                    FaxDefault = ""
+                    PhoneCell = "612-333-6321",
+                    PhoneDirect = "612-555-1236",
+                    PhoneHome = "612-555-0102",
+                    Name = "Elmer Dickett"
                 },
 
                 new Employee
                 {
                     ID = 4,
-                    Name = "John Doe",
                     // Doug - in real life I would check w/ product owner
                     // about email having a typo. it should probably be johnD
                     EmailDefault = "johns@twgi.com",
-                    PhoneNumberDirect = "612-555-1237",
-                    FaxDefault = "612-555-7321"
+                    FaxDefault = "612-555-7321",
+                    PhoneCell = "612-555-9900",
+                    PhoneDirect = "612-555-1237",
+                    Name = "John Doe",
+                    Title = "AIA"
                 }
             };
-
-           // return EmployeeList;
         }
     }
 

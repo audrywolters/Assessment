@@ -23,7 +23,7 @@ export class EmployeeList extends Component {
                             <tr>
                                 <th>Name</th>
                                 <th>Email</th>
-                                <th>Phone Number</th>
+                                <th>Direct Phone Number</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -31,7 +31,7 @@ export class EmployeeList extends Component {
                                 <tr key={e.id} onClick={() => this.setState({ employee: e })}>
                                     <td>{e.name}</td>
                                     <td>{e.emailDefault}</td>
-                                    <td>{e.phoneNumberDirect}</td>
+                                    <td>{e.phoneDirect}</td>
                                 </tr>
                             ) }
                         </tbody>
@@ -39,6 +39,7 @@ export class EmployeeList extends Component {
                 </div>
                 <div className="detail">
                     <ul>
+                        <li><h3>Employee</h3></li>
                         <li>name: {this.state.employee.name}</li>
                         <li>fax: {this.state.employee.faxDefault}</li>
                     </ul>
