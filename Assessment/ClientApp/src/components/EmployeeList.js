@@ -33,10 +33,13 @@ export class EmployeeList extends Component {
         this.setState({ employee: e })
     }
 
-    deleteEmployee(e) {
-
+    handleChange(evt) {
+        const value = evt.target.value;
+        
+        //this.setState({
+        //    employee.[evt.target.name]: value
+        //});
     }
-
 
     //disableNoNoEdit() {
 
@@ -91,19 +94,21 @@ export class EmployeeList extends Component {
                 <div className="detail">
                     <div className="detailHeader">
                         <span>Employee</span>
-                        <button>Save</button>
+                        <button onClick={() => this.updateEmployee(this.state.employee)}>Save</button>
                     </div>
 
                     <ul>
-                        <li><label>Name:</label>        <input type="text" value={this.state.employee.name} /></li>
-                        <li><label>Direct:</label>      <input type="text" value={this.state.employee.phoneDirect} /></li>
-                        <li><label>Cell:</label>        <input type="text" value={this.state.employee.phoneCell} /></li>
-                        <li><label>Home:</label>        <input type="text" value={this.state.employee.phoneHome} /></li>
-                        <li><label>Fax:</label>         <input type="text" value={this.state.employee.faxDefault} /></li>
-                        <li><label>Home Fax:</label>    <input type="text" value={this.state.employee.faxHome} /></li>
-                        <li><label>Email:</label>       <input type="text" value={this.state.employee.emailDefault} /></li>
-                        <li><label>Email Home:</label>  <input type="text" value={this.state.employee.emailHome} /></li>
-                        <li><label>Is Active:</label>   <input type="checkbox" checked={this.state.employee.isActive} /></li>
+                        <li><label>Name:</label>        <input name="name"         onChange={this.handleChange} type="text" value={this.state.employee.name} /></li>
+                        <li><label>Title:</label>       <input name="title"        onChange={this.handleChange} type="text" value={this.state.employee.title} /></li>
+                        <li><label>Direct:</label>      <input name="phoneDirect"  onChange={this.handleChange} type="text" value={this.state.employee.phoneDirect} /></li>
+                        <li><label>Cell:</label>        <input name="phoneCell"    onChange={this.handleChange} type="text" value={this.state.employee.phoneCell} /></li>
+                        <li><label>Home:</label>        <input name="phoneHome"    onChange={this.handleChange} type="text" value={this.state.employee.phoneHome} /></li>
+                        <li><label>Fax:</label>         <input name="faxDefault"   onChange={this.handleChange} type="text" value={this.state.employee.faxDefault} /></li>
+                        <li><label>Home Fax:</label>    <input name="faxHome"      onChange={this.handleChange} type="text" value={this.state.employee.faxHome} /></li>
+                        <li><label>Email:</label>       <input name="emailDefault" onChange={this.handleChange} type="text" value={this.state.employee.emailDefault} /></li>
+                        <li><label>Email Home:</label>  <input name="emailHome"    onChange={this.handleChange} type="text" value={this.state.employee.emailHome} /></li>
+                        { /* checkbox will need a special event handler */ }
+                        <li><label>Is Active:</label>   <input name="isActive" type="checkbox" checked={this.state.employee.isActive} /></li>
                     </ul>
                 </div>   
             </>
@@ -124,4 +129,19 @@ export class EmployeeList extends Component {
         const data = await response.json();
         this.setState({ employee: data, loading: false });
     }
+
+    // update
+    async updateEmployee(employee) {
+        const response = await fetch(`employeeList/${employee}`);
+        const data = await response.json();
+        this.setState({ employee: data, loading: false });
+    }
+
+    // delete
+    async deleteEmployee(id) {
+        const response = await fetch(`employeeList/${id}`);
+        const data = await response.json();
+        this.setState({ employee: data, loading: false });
+    }
+
 }

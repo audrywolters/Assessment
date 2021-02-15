@@ -1,9 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using Assessment.Models;
 using Microsoft.AspNetCore.Mvc;
-using System.Text.Json;
 
 namespace Assessment.Controllers
 {
@@ -24,7 +22,9 @@ namespace Assessment.Controllers
         [HttpGet]
         public IList<Employee> Get()
         {
-            // SELECT * FROM Employees
+            // SELECT *
+            // FROM Employees
+
             return EmployeeList;
         } 
 
@@ -34,23 +34,37 @@ namespace Assessment.Controllers
             // SELECT *
             // FROM Employees
             // WHERE ID = @id
+
             Employee employee = EmployeeList.FirstOrDefault(e => e.ID == id);
             return employee;
-            //string jsonEmployee = JsonSerializer.Serialize(employee);
-            //return jsonEmployee;
         }
 
-        //[HttpPost]
-        //public IList<Employee> EditEmployee(Employee employee) // AUDRY - this may be json stuff
-        //{
-        //    // UPDATE Employees
-        //    // SET Name = @name, ... 
-        //    // WHERE ID = @employeeID
-        //    Employee employeeToEdit = 
-        //    Employees.Add(employee);
-        //    return Employees;
-        //}
+        [HttpPut("{employee}")]
+        public IList<Employee> EditEmployee(Employee employee)
+        {
+            // UPDATE Employees
+            // SET Name = @name, ... 
+            // WHERE ID = @id
 
+            Employee employeeToEdit = EmployeeList.FirstOrDefault(e => e.ID == employee.ID);
 
+            // AUDRY - fix
+            //employeeToEdit = employee;
+
+            return null;
+        }
+
+        [HttpDelete("{id}")]
+        public IList<Employee> DeleteEmploye(int id)
+        {
+            // DELETE
+            // FROM Employees
+            // WHERE ID = @id
+
+            Employee employeeToDelete = EmployeeList.FirstOrDefault(e => e.ID == id);
+            EmployeeList.Remove(employeeToDelete);
+
+            return EmployeeList;
+        }
     }
 }
