@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import { HashRouter as Router, Route, Link } from "react-router-dom";
-import { EmployeeList } from './EmployeeList';
-import { Projects } from './Projects';
-import { FetchData } from './FetchData';
-import '../index.css';
+import { EmployeeList } from '../EmployeeList/EmployeeList';
+import { Projects } from '../ProjectList/Projects';
+import { FetchData } from '../FetchData';
+import './App.css';
 
 export default class App extends Component {
 

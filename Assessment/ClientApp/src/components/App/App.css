@@ -1,0 +1,10 @@
+﻿.listing {
+    width: 60%;
+    float: left;
+    background-color: mistyrose;
+}
+
+.detail {
+    margin-left: 40%;
+    background-color: cadetblue;
+}

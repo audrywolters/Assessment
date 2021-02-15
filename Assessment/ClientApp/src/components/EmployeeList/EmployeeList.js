@@ -1,5 +1,5 @@
 ﻿import React, { Component } from 'react';
-import '../index.css';
+import './EmployeeList.css';
 
 export class EmployeeList extends Component {
 
@@ -12,6 +12,10 @@ export class EmployeeList extends Component {
         this.populateEmployeeList();
     }
 
+    clickRow(id) {
+        console.log("hi", id);
+    }
+
     render() {
         return (
             <>
@@ -22,18 +26,23 @@ export class EmployeeList extends Component {
                             <tr>
                                 <th>Name</th>
                                 <th>Email</th>
+                                <th>Phone Number</th>
                             </tr>
                         </thead>
                         <tbody>
-                            { this.state.employeeList.map(employee =>
-                                <tr key={employee.id}>
+                            {this.state.employeeList.map(employee =>
+                                <tr key={employee.id} onClick={() => this.getEmployee(employee.id)}>
                                     <td>{employee.name}</td>
                                     <td>{employee.emailDefault}</td>
+                                    <td>{employee.phoneNumberDirect}</td>
                                 </tr>
                             ) }
                         </tbody>
                     </table>
                 </div>
+                <div className="detail">
+                  tbd
+                </div>  
             </>
         );
     }
@@ -43,5 +52,12 @@ export class EmployeeList extends Component {
         const response = await fetch('employeeList');
         const data = await response.json();
         this.setState({employeeList: data, loading: false });      
+    }
+
+    // call server for data
+    async getEmployee(employeeID) {
+        const response = await fetch('employeeList');
+        const data = await response.json();
+        this.setState({ employeeList: data, loading: false });
     }
 }

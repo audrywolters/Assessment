@@ -10,6 +10,9 @@ namespace Assessment.Models
 
         public string EmailDefault { get; set; }
 
+        public string PhoneNumberDirect { get; set; }
+
+        public string FaxDefault { get; set; }
     }
 
     // AUDRY - extra if we get to it
