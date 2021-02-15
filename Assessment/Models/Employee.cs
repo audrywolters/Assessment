@@ -13,7 +13,7 @@ namespace Assessment.Models
 
         public string FaxDefault { get; set; }
 
-        // ideally it would be nice to have seperate
+        // ideally it would be nice to have separate
         // tele and email tables - clearers/safer
         // and would allow user to create custom contact types
         // i.e. "Landline: 612-555-0000" 

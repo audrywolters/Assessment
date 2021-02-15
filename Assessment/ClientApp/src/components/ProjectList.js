@@ -28,7 +28,7 @@ export class ProjectList extends Component {
                                 <tr key={p.id}>
                                     <td>{p.name}</td>
                                     <td>{p.date}</td>
-                                    <td>{p.contact}</td>
+                                    <td>{p.contactName}</td>
                                     <td><button onClick={() => this.setProject(p)}>Edit</button>
                                         <button onClick={() => this.deleteProject(p.id)}>Delete</button></td>
                                 </tr>
@@ -36,6 +36,20 @@ export class ProjectList extends Component {
                         </tbody>
                     </table>
                 </div>
+
+                <div className="detail">
+                    <div className="detailHeader">
+                        <span>Project</span>
+                        { /* below wont work because of evil onChange business */}
+                        <button onClick={() => this.addNewProjectData(this.state.project)}>Save</button>
+                    </div>
+
+                    <ul>
+                        <li><label>Name:</label>   <input name="name"         onChange={this.handleChange} type="text" value={this.state.project.name} /></li>
+                        <li><label>Title:</label>  <input name="date"         onChange={this.handleChange} type="text" value={this.state.project.date} /></li>
+                        <li><label>Cell:</label>   <input name="contactName"  onChange={this.handleChange} type="text" value={this.state.project.contactName} /></li>
+                    </ul>
+                </div> 
             </>
         );
     }

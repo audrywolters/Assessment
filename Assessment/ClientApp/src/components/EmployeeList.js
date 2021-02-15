@@ -25,7 +25,6 @@ export class EmployeeList extends Component {
 
     setEmployee(e) {
         // AUDRY - react doesn't like this
-
         // clear old data (or else Elmer's fax will show up on John's)
         for (let i = 0; i < this.state.inputs.length; i++) {
             let input = this.state.inputs[i];
@@ -106,7 +105,7 @@ export class EmployeeList extends Component {
     }
 
     //// call the server ////
-    // AUDRY - add try/catch
+    // AUDRY - try/catch 
 
     // get all
     async getEmployeeList() {

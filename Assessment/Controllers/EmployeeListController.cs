@@ -63,21 +63,6 @@ namespace Assessment.Controllers
             return EmployeeList;
         }
 
-        //[HttpPut("{employee}")]
-        //public IList<Employee> EditEmployee(Employee employee)
-        //{
-        //    // UPDATE Employees
-        //    // SET Name = @name, ... 
-        //    // WHERE ID = @id
-
-        //    Employee employeeToEdit = EmployeeList.FirstOrDefault(e => e.ID == employee.ID);
-
-        //    // AUDRY - fix
-        //    //employeeToEdit = employee;
-
-        //    return null;
-        //}
-
         [HttpDelete("{id}")]
         public IList<Employee> DeleteEmploye(int id)
         {
