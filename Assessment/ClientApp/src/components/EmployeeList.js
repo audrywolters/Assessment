@@ -71,6 +71,7 @@ export class EmployeeList extends Component {
                                 <th>Name</th>
                                 <th>Email</th>
                                 <th>Direct</th>
+                                <th><button>New Employee</button></th>
                             </tr>
                         </thead>
                         <tbody>
@@ -79,8 +80,8 @@ export class EmployeeList extends Component {
                                     <td>{e.name}</td>
                                     <td>{e.emailDefault}</td>
                                     <td>{e.phoneDirect}</td>
-                            <td><button onClick={() => this.setEmployee(e)}>Edit</button></td>
-                                    <td><button onClick={() => this.deleteEmployee(e)}>Delete</button></td>
+                                    <td><button onClick={() => this.setEmployee(e)}>Edit</button>
+                                        <button onClick={() => this.deleteEmployee(e)}>Delete</button></td>
                                 </tr>
                             ) }
                         </tbody>
@@ -91,7 +92,6 @@ export class EmployeeList extends Component {
                     <div className="detailHeader">
                         <span>Employee</span>
                         <button>Save</button>
-                        <button>New</button>
                     </div>
 
                     <ul>
