@@ -10,11 +10,7 @@ export class EmployeeList extends Component {
     };
 
     componentDidMount() {
-        this.populateEmployeeList();
-    }
-
-    clickRow(id) {
-        console.log("hi", id);
+        this.getEmployeeList();
     }
 
     render() {
@@ -31,11 +27,11 @@ export class EmployeeList extends Component {
                             </tr>
                         </thead>
                         <tbody>
-                            {this.state.employeeList.map(employee =>
-                                <tr key={employee.id} onClick={() => this.getEmployee(employee.id)}>
-                                    <td>{employee.name}</td>
-                                    <td>{employee.emailDefault}</td>
-                                    <td>{employee.phoneNumberDirect}</td>
+                            {this.state.employeeList.map(e =>
+                                <tr key={e.id} onClick={() => this.setState({ employee: e })}>
+                                    <td>{e.name}</td>
+                                    <td>{e.emailDefault}</td>
+                                    <td>{e.phoneNumberDirect}</td>
                                 </tr>
                             ) }
                         </tbody>
@@ -43,9 +39,6 @@ export class EmployeeList extends Component {
                 </div>
                 <div className="detail">
                     <ul>
-                        <li>
-                            {JSON.stringify()}</li>
-                        <li>id: {this.state.employee.id}</li>
                         <li>name: {this.state.employee.name}</li>
                         <li>fax: {this.state.employee.faxDefault}</li>
                     </ul>
@@ -54,20 +47,18 @@ export class EmployeeList extends Component {
         );
     }
 
-    // call server for data
-    async populateEmployeeList() {
-        console.log('calling for all!...');
+    //// call the server ////
+    // get all
+    async getEmployeeList() {
         const response = await fetch(`employeeList`);
         const data = await response.json();
         this.setState({employeeList: data, loading: false });      
     }
 
-    // call server for data
+    // get one
     async getEmployee(id) {
-        console.log('calling for one!...', id);
         const response = await fetch(`employeeList/${id}`);
-        const data = await response.json;
-        console.log('employee obj ', data);
+        const data = await response.json();
         this.setState({ employee: data, loading: false });
     }
 }
