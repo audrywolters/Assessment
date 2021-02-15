@@ -19,7 +19,7 @@ namespace Assessment.Models
         // i.e. "Landline: 612-555-0000" 
         public string FaxHome { get; set; }
 
-        public string IsActive { get; set; }
+        public bool IsActive { get; set; }
 
         public string PhoneCell { get; set; }
 
@@ -41,6 +41,7 @@ namespace Assessment.Models
                     ID = 1,
                     EmailDefault = "johns@twgi.com",
                     FaxDefault = "612-555-4321",
+                    IsActive = true,
                     Name = "John Smith",
                     PhoneDirect = "612-555-1234",
                     Title = "AIA"
@@ -51,6 +52,7 @@ namespace Assessment.Models
                     ID = 2,
                     EmailDefault = "moniqueu@twgi.com",
                     FaxDefault = "612-555-5321",
+                    IsActive = false,
                     Name = "Monique Unique",
                     PhoneDirect = "612-555-1235",
                     Title = "CIC"
@@ -60,6 +62,7 @@ namespace Assessment.Models
                 {
                     ID = 3,
                     EmailDefault = "elmerd@twgi.com",
+                    IsActive = true,
                     PhoneCell = "612-333-6321",
                     PhoneDirect = "612-555-1236",
                     PhoneHome = "612-555-0102",
@@ -73,6 +76,7 @@ namespace Assessment.Models
                     // about email having a typo. it should probably be johnD
                     EmailDefault = "johns@twgi.com",
                     FaxDefault = "612-555-7321",
+                    IsActive = true,
                     PhoneCell = "612-555-9900",
                     PhoneDirect = "612-555-1237",
                     Name = "John Doe",

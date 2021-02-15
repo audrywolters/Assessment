@@ -1,5 +1,6 @@
 ﻿import React, { Component } from 'react';
-import './EmployeeList.css';
+import { Employee } from './Employee';
+import './Detail.css';
 
 export class EmployeeList extends Component {
 
@@ -23,7 +24,7 @@ export class EmployeeList extends Component {
                             <tr>
                                 <th>Name</th>
                                 <th>Email</th>
-                                <th>Direct Phone Number</th>
+                                <th>Direct</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -37,12 +38,14 @@ export class EmployeeList extends Component {
                         </tbody>
                     </table>
                 </div>
+
                 <div className="detail">
-                    <ul>
-                        <li><h3>Employee</h3></li>
-                        <li>name: {this.state.employee.name}</li>
-                        <li>fax: {this.state.employee.faxDefault}</li>
-                    </ul>
+                    <div className="detailHeader">
+                        <span>Employee</span>
+                        <button>Edit/Save</button>
+                        <button>Delete</button>
+                    </div>
+                    <Employee employee={this.state.employee} />
                 </div>  
             </>
         );

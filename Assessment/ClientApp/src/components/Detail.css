@@ -1,0 +1,12 @@
+﻿.detail {
+    display: flex;
+    flex-flow: column;
+    height: 100%;
+}
+
+.detailHeader div {
+    float: left;
+}
+.detailHeader button {
+    float: right;
+}
