@@ -19,10 +19,13 @@ export class EmployeeList extends Component {
         });
 
         this.getEmployeeList();
+
+        // AUDRY - fix
         //this.disableNoNoEdit();
     }
 
     setEmployee(e) {
+        // AUDRY - react doesn't like this
         // clear old data (or else Elmer's fax will show up on John's)
         for (let i = 0; i < this.state.inputs.length; i++) {
             let input = this.state.inputs[i];
@@ -33,6 +36,7 @@ export class EmployeeList extends Component {
         this.setState({ employee: e })
     }
 
+    // AUDRY - fix
     handleChange(evt) {
         const value = evt.target.value;
         
@@ -41,6 +45,7 @@ export class EmployeeList extends Component {
         //});
     }
 
+    // AUDRY - fix
     //disableNoNoEdit() {
 
     //    for (let i = 0; i < this.state.inputs.length; i++) {
@@ -53,6 +58,7 @@ export class EmployeeList extends Component {
     //    }
     //}
 
+    // AUDRY - fix
     //toggleEditMode = () => {
     //    console.log('edit?', this.state.isEditMode);
 
@@ -84,7 +90,7 @@ export class EmployeeList extends Component {
                                     <td>{e.emailDefault}</td>
                                     <td>{e.phoneDirect}</td>
                                     <td><button onClick={() => this.setEmployee(e)}>Edit</button>
-                                        <button onClick={() => this.deleteEmployee(e)}>Delete</button></td>
+                                        <button onClick={() => this.deleteEmployee(e.id)}>Delete</button></td>
                                 </tr>
                             ) }
                         </tbody>
@@ -116,32 +122,33 @@ export class EmployeeList extends Component {
     }
 
     //// call the server ////
+    // AUDRY - try/catch for these
+
     // get all
     async getEmployeeList() {
         const response = await fetch(`employeeList`);
         const data = await response.json();
-        this.setState({employeeList: data, loading: false });      
+        this.setState({ employeeList: data });
     }
 
     // get one
     async getEmployee(id) {
         const response = await fetch(`employeeList/${id}`);
         const data = await response.json();
-        this.setState({ employee: data, loading: false });
+        this.setState({ employee: data });
     }
 
     // update
     async updateEmployee(employee) {
-        const response = await fetch(`employeeList/${employee}`);
+        const response = await fetch(`employeeList/${employee}`, { method: 'PUT' });
         const data = await response.json();
-        this.setState({ employee: data, loading: false });
+        this.setState({ employee: data });
     }
 
     // delete
     async deleteEmployee(id) {
-        const response = await fetch(`employeeList/${id}`);
+        const response = await fetch(`employeeList/${id}`, { method: 'DELETE' });
         const data = await response.json();
-        this.setState({ employee: data, loading: false });
+        this.setState({ employeeList: data });
     }
-
 }
