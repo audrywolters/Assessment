@@ -1,4 +1,5 @@
 ﻿import React, { Component } from 'react';
+import './Listing.css';
 import './Detail.css';
 
 export class EmployeeList extends Component {
@@ -9,11 +10,17 @@ export class EmployeeList extends Component {
     };
 
     componentDidMount() {
-        // prepare detail view all nice like
-        this.resetEmployeeDetail();
-
         // calls the server and sets all employees into the listing view
         this.getEmployeeList();
+    }
+
+    clickNewEmployee() {
+        this.resetEmployeeDetail();
+    }
+
+    clickSaveEmployee(emp) {
+        // set the employee in the detail view
+        this.setState({ employee: emp })
     }
 
     handleCheckboxChange = (evt) => {
@@ -64,15 +71,6 @@ export class EmployeeList extends Component {
         })
     }
 
-    clickNewEmployee() {
-        this.resetEmployeeDetail();
-	}
-
-    clickSaveEmployee(emp) {
-        // set the employee in the detail view
-        this.setState({ employee: emp })
-    }
-
     setEmployeeDetail(emp) {
         // clear old data
         this.resetEmployeeDetail();
@@ -112,7 +110,6 @@ export class EmployeeList extends Component {
                 <div className="detail">
                     <div className="detailHeader"> 
                         <span>Employee</span>
-                        { /* below wont work because of evil onChange business */ }
                         <button onClick={() => this.saveEmployee(this.state.employee)}>Save</button>
                     </div>
 
@@ -145,28 +142,13 @@ export class EmployeeList extends Component {
         this.setState({ employeeList: data });
     }
 
-    // get one
-    async getEmployee(id) {
-        const response = await fetch(`employeeList/${id}`);
-        const data = await response.json();
-        this.setState({ employee: data });
-    }
-
-    // create/update - there is only one button
+    // create/update - there is only one save button
     async saveEmployee(employee) {
         let jsonEmployee = JSON.stringify(employee);
         const response = await fetch(`employeeList/${jsonEmployee}`, { method: 'POST' });
         const data = await response.json();
         this.setState({ employeeList: data });
     }
-
-    //// update
-    //async updateEmployee(employee) {
-    //    let jsonEmployee = JSON.stringify(employee);
-    //    const response = await fetch(`employeeList/${jsonEmployee}`, { method: 'PUT' });
-    //    const data = await response.json();
-    //    this.setState({ employeeList: data });
-    //}
 
     // delete
     async deleteEmployee(id) {

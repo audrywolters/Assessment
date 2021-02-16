@@ -13,9 +13,10 @@ namespace Assessment.Controllers
         public IList<Employee> EmployeeList;
         public EmployeeListController()
         {
-            // initialize class - supposedly
+            // initialize class - supposdley
             // cannot figure out how to NOT hit this everytime I access
-            // it forgets any new employee I add
+            // it overwrites any new employee I add
+            // there is a simple answer
             EmployeeList = Employee.GenerateEmployees();
         }
 
@@ -28,19 +29,19 @@ namespace Assessment.Controllers
             return EmployeeList;
         } 
 
-        [HttpGet("{id}")]
-        public Employee Get(int id)
-        {
-            // SELECT Name, ...
-            // FROM Employees
-            // WHERE ID = @id
+        //[HttpGet("{id}")]
+        //public Employee Get(int id)
+        //{
+        //    // SELECT Name, ...
+        //    // FROM Employees
+        //    // WHERE ID = @id
 
-            Employee employee = EmployeeList.FirstOrDefault(e => e.ID == id);
-            return employee;
-        }
+        //    Employee employee = EmployeeList.FirstOrDefault(e => e.ID == id);
+        //    return employee;
+        //}
 
         [HttpPost("{jsonEmployee}")]
-        public IList<Employee> UpdateCreateEmployee(string jsonEmployee)
+        public IList<Employee> SaveEmployee (string jsonEmployee)
         {
             // turn json string into C# object
             Employee newEmployee = JsonConvert.DeserializeObject<Employee>(jsonEmployee);
@@ -50,17 +51,17 @@ namespace Assessment.Controllers
             if (foundEmployee == null)
             {
                 // INSERT INTO Employees (Name ...)
-                // VALUES ('Steven Sondheim' ...);
+                // VALUES ('Steven Sondheim', ...);
 
-                // give new employee a "primary key"
-                newEmployee.ID = EmployeeList.Count() + 1;
                 // we are creating
+                // give new employee a "primary key"ß
+                newEmployee.ID = EmployeeList.Count() + 1;
                 EmployeeList.Add(newEmployee);
             }
             else
             {
                 // UPDATE Employees
-                // SET Name = @name ...
+                // SET Name = @name, ...
                 // WHERE ID = @id
 
                 // we're updating so replace

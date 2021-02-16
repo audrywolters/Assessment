@@ -13,48 +13,46 @@ namespace Assessment.Controllers
         private IList<Project> ProjectList { get; set; }
         public ProjectListController()
         {
-            // initialize class to have stock employess
-            // we want it to happen once
-            // because users will be adding/deleting projects in front end
-            // don't want to send the original, unedited listEmp
+            // initialize class - supposedly
+            // cannot figure out how to NOT hit this everytime I access
+            // it overwrites any new project I add
+            // there is a simple answer
             ProjectList = Project.GenerateProjects();
         }
         
         [HttpGet]
         public IList<Project> Get()
         {
-            // SELECT *
+            // SELECT Name, ...
             // FROM Projects
 
             return ProjectList;
-        } 
-
-        [HttpGet("{id}")]
-        public Project Get(int id)
-        {
-            // SELECT *
-            // FROM Projects
-            // WHERE ID = @id
-
-            Project project = ProjectList.FirstOrDefault(e => e.ID == id);
-            return project;
         }
-
-        [HttpPost("{project}")]
-        public IList<Project> AddNewProjectData(string jsonProject)
+        
+        [HttpPost("{jsonProject}")]
+        public IList<Project> SaveProject (string jsonProject)
         {
             // turn json string into C# object
             Project newProject = JsonConvert.DeserializeObject<Project>(jsonProject);
 
             // look to see if we are updating or creating
-            Project foundProject = ProjectList.FirstOrDefault(e => e.ID == newProject.ID);
+            Project foundProject = ProjectList.FirstOrDefault(p => p.ID == newProject.ID);
             if (foundProject == null)
             {
+                // INSERT INTO Projects (Name ...)
+                // VALUES ('Build Bird House', ...);
+
                 // we are creating
+                // give new project a "primary key"
+                newProject.ID = ProjectList.Count() + 1;
                 ProjectList.Add(newProject);
             }
             else
             {
+                // UPDATE Projects
+                // SET Name = @name, ...
+                // WHERE ID = @id
+
                 // we're updating so replace
                 ProjectList.Remove(foundProject);
                 ProjectList.Add(newProject);

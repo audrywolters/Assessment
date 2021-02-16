@@ -1,5 +1,6 @@
 ﻿import React, { Component } from 'react';
 import './Listing.css';
+import './Detail.css';
 
 export class ProjectList extends Component {
 
@@ -9,8 +10,53 @@ export class ProjectList extends Component {
     }
 
     componentDidMount() {
-        // get everybody
+        // calls the server and sets all project into the listing view
         this.getProjectList();
+    }
+
+    clickNewProject() {
+        this.resetProjectDetail();
+    }
+
+    clickSaveProject(proj) {
+        // set the project in the detail view
+        this.setState({ project: proj })
+    }
+
+    handleInputChange = (evt) => {
+        // make a copy of project so state doesn't get upset about immutablity
+        let copyOfProject = this.state.project;
+
+        // use <input name="foo" as variable so this method works for each input
+        copyOfProject[evt.target.name] = evt.target.value;
+
+        // set that state!
+        this.setState({
+            project: copyOfProject
+        })
+
+        // AUDRY - it would be nice if the changes didn't update in listing
+    }
+
+    resetProjectDetail() {
+        let newProject =
+        {
+            name: '',
+            date: '',
+            contact: ''
+        }
+
+        this.setState({
+            project: newProject
+        })
+    }
+
+    setProjectDetail(proj) {
+        // clear old data
+        this.resetProjectDetail();
+
+        // set the project in the detail view
+        this.setState({ project: proj })
     }
 
     render() {
@@ -24,18 +70,17 @@ export class ProjectList extends Component {
                                 <th>Name</th>
                                 <th>Date</th>
                                 <th>Contact</th>
-                                <th><button>New Project</button></th>
-                                { /* <th><button onClick={() => this.setProject()}>New Project</button></th> */}
+                                <th><button onClick={() => this.clickNewProject()}>New Project</button></th>
                             </tr>
                         </thead>
                         <tbody>
-                            {this.state.projectList.map(p =>
-                                <tr key={p.id}>
-                                    <td>{p.name}</td>
-                                    <td>{p.date}</td>
-                                    <td>{p.contactName}</td>
-                                    <td><button onClick={() => this.setProject(p)}>Edit</button>
-                                        <button onClick={() => this.deleteProject(p.id)}>Delete</button></td>
+                            {this.state.projectList.map(proj =>
+                                <tr key={proj.id}>
+                                    <td>{proj.name}</td>
+                                    <td>{proj.date}</td>
+                                    <td>{proj.contact}</td>
+                                    <td><button onClick={() => this.setProjectDetail(proj)}>Edit</button>
+                                        <button onClick={() => this.deleteProject(proj.id)}>Delete</button></td>
                                 </tr>
                             )}
                         </tbody>
@@ -45,14 +90,13 @@ export class ProjectList extends Component {
                 <div className="detail">
                     <div className="detailHeader">
                         <span>Project</span>
-                        { /* below wont work because of evil onChange business */}
-                        <button onClick={() => this.addNewProjectData(this.state.project)}>Save</button>
+                        <button onClick={() => this.saveProject(this.state.project)}>Save</button>
                     </div>
 
                     <ul>
-                        <li><label>Name:</label>   <input name="name"         onChange={this.handleChange} type="text" value={this.state.project.name} /></li>
-                        <li><label>Title:</label>  <input name="date"         onChange={this.handleChange} type="text" value={this.state.project.date} /></li>
-                        <li><label>Cell:</label>   <input name="contactName"  onChange={this.handleChange} type="text" value={this.state.project.contactName} /></li>
+                        <li><label>Name:</label>    <input name="name"     onChange={this.handleInputChange} type="text"  value={this.state.project.name} /></li>
+                        <li><label>Date:</label>    <input name="date"     onChange={this.handleInputChange} type="text"  value={this.state.project.date} /></li>
+                        <li><label>Contact:</label> <input name="contact"  onChange={this.handleInputChange} type="text"  value={this.state.project.contact} /></li>
                     </ul>
                 </div> 
             </>
@@ -69,15 +113,8 @@ export class ProjectList extends Component {
         this.setState({ projectList: data });
     }
 
-    // get one
-    async getProject(id) {
-        const response = await fetch(`projectList/${id}`);
-        const data = await response.json();
-        this.setState({ project: data });
-    }
-
-    // create/update
-    async addNewProjectData(project) {
+    // create/update - there is only one save button
+    async saveProject(project) {
         let jsonProject = JSON.stringify(project);
         const response = await fetch(`projectList/${jsonProject}`, { method: 'POST' });
         const data = await response.json();
