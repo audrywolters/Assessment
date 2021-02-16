@@ -9,10 +9,10 @@ export class EmployeeList extends Component {
     };
 
     componentDidMount() {
-        // set all inputs in detail form to empty strings
+        // prepare detail view all nice like
         this.resetEmployeeDetail();
 
-        // calls the server and sets employees into the listing view
+        // calls the server and sets all employees into the listing view
         this.getEmployeeList();
     }
 
@@ -45,15 +45,33 @@ export class EmployeeList extends Component {
     }
 
     resetEmployeeDetail() {
-        // safely retrieve and set input data to empty string
-        Array.from(document.querySelectorAll("input")).forEach(
-            input => (input.value = "")
-        );
+        let newEmployee =
+        {
+            name: '',
+            title: '',
+            phoneDirect: '',
+            phoneCell: '',
+            phoneHome: '',
+            faxDefault: '',
+            faxHome: '',
+            emailDefault: '',
+            emailHome: '',
+            isActive: true
+        }
 
         this.setState({
-            employee: [{}]
-        });
+            employee: newEmployee
+        })
+    }
+
+    clickNewEmployee() {
+        this.resetEmployeeDetail();
 	}
+
+    clickSaveEmployee(emp) {
+        // set the employee in the detail view
+        this.setState({ employee: emp })
+    }
 
     setEmployeeDetail(emp) {
         // clear old data
@@ -74,7 +92,7 @@ export class EmployeeList extends Component {
                                 <th>Name</th>
                                 <th>Email</th>
                                 <th>Direct</th>
-                                <th><button onClick={() => this.resetEmployeeDetail()}>New Employee</button></th>
+                                <th><button onClick={() => this.clickNewEmployee()}>New Employee</button></th>
                             </tr>
                         </thead>
                         <tbody>
@@ -95,7 +113,7 @@ export class EmployeeList extends Component {
                     <div className="detailHeader"> 
                         <span>Employee</span>
                         { /* below wont work because of evil onChange business */ }
-                        <button onClick={() => this.updateCreateEmployee(this.state.employee)}>Save</button>
+                        <button onClick={() => this.saveEmployee(this.state.employee)}>Save</button>
                     </div>
 
                     <ul>
@@ -134,13 +152,21 @@ export class EmployeeList extends Component {
         this.setState({ employee: data });
     }
 
-    // create/update - i know it's bad to combine the two... but I have some reason...
-    async updateCreateEmployee(employee) {
+    // create/update - there is only one button
+    async saveEmployee(employee) {
         let jsonEmployee = JSON.stringify(employee);
         const response = await fetch(`employeeList/${jsonEmployee}`, { method: 'POST' });
         const data = await response.json();
         this.setState({ employeeList: data });
     }
+
+    //// update
+    //async updateEmployee(employee) {
+    //    let jsonEmployee = JSON.stringify(employee);
+    //    const response = await fetch(`employeeList/${jsonEmployee}`, { method: 'PUT' });
+    //    const data = await response.json();
+    //    this.setState({ employeeList: data });
+    //}
 
     // delete
     async deleteEmployee(id) {

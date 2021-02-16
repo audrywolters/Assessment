@@ -10,7 +10,7 @@ namespace Assessment.Controllers
     [Route("[controller]")]
     public class EmployeeListController : ControllerBase
     {
-        private IList<Employee> EmployeeList { get; set; }
+        public IList<Employee> EmployeeList { get; set; }
         public EmployeeListController()
         {
             // initialize class to have stock employess
@@ -50,6 +50,8 @@ namespace Assessment.Controllers
             Employee foundEmployee = EmployeeList.FirstOrDefault(e => e.ID == newEmployee.ID);
             if (foundEmployee == null)
             {
+                // give new employee a "primary key"
+                newEmployee.ID = EmployeeList.Count() + 1;
                 // we are creating
                 EmployeeList.Add(newEmployee);
             }
