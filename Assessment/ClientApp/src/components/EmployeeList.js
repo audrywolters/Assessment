@@ -24,28 +24,55 @@ export class EmployeeList extends Component {
     }
 
     setEmployee(e) {
-        // AUDRY - react doesn't like this
+        // AUDRY - do this properly
         // clear old data (or else Elmer's fax will show up on John's)
-        for (let i = 0; i < this.state.inputs.length; i++) {
-            let input = this.state.inputs[i];
-            input.value = "";
-        }
+        //for (let i = 0; i < this.state.inputs.length; i++) {
+        //    let input = this.state.inputs[i];
+        //    input.value = "";
+        //}
 
         // set the employee in the detail view
         this.setState({ employee: e })
     }
 
     // AUDRY - fix
-    handleChange = (evt) => {
-        let value = evt.target.value;
+    //handleChange = (evt) => {
+    //    let value = evt.target.value;
 
-        // AUDRY - doesn't work either. there has got to be a way to update an object
-        // i refuse to add each property to state. that's ridiculous. urg!
+    //    // AUDRY - doesn't work either. there has got to be a way to update an object
+    //    // i refuse to add each property to state. that's ridiculous. urg!
 
-        let objAndProp = 'employee.' + evt.target.name;
+    //    let objAndProp = 'employee.' + evt.target.name;
+    //    this.setState({
+    //        [objAndProp]: value
+    //    });
+    //}
+
+    handleChange = (e) => {
+
+        let newEmployee = this.state.employee;
+        newEmployee[e.target.name] = e.target.value;
         this.setState({
-            [objAndProp]: value
-        });
+            employee: newEmployee
+        })
+
+
+
+        //this.setState(prevState => {
+        //    employee: {
+        //        ...prevState.employee,
+
+        //    })
+
+
+
+        //let inputName = el.target.name;
+        //let inputValue = el.target.value;
+
+        //let employeeCopy = Object.assign({}, tprive);
+        //employeeCopy.formInputs[inputName].value = inputValue;
+
+        //this.setState(employeeCopy);
     }
 
     render() {
@@ -64,13 +91,13 @@ export class EmployeeList extends Component {
                             </tr>
                         </thead>
                         <tbody>
-                            {this.state.employeeList.map(e =>
-                                <tr key={e.id}>
-                                    <td>{e.name}</td>
-                                    <td>{e.emailDefault}</td>
-                                    <td>{e.phoneDirect}</td>
-                                    <td><button onClick={() => this.setEmployee(e)}>Edit</button>
-                                        <button onClick={() => this.deleteEmployee(e.id)}>Delete</button></td>
+                            {this.state.employeeList.map(emp =>
+                                <tr key={emp.id}>
+                                    <td>{emp.name}</td>
+                                    <td>{emp.emailDefault}</td>
+                                    <td>{emp.phoneDirect}</td>
+                                    <td><button onClick={() => this.setEmployee(emp)}>Edit</button>
+                                        <button onClick={() => this.deleteEmployee(emp.id)}>Delete</button></td>
                                 </tr>
                             ) }
                         </tbody>
