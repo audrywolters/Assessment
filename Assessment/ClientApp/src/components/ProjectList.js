@@ -9,15 +9,7 @@ export class ProjectList extends Component {
     }
 
     componentDidMount() {
-
-        //let allInputs = document.querySelectorAll("input");
-
-        //// AUDRY - react doesn't like this
-        //// ...can I leave them uncontrolled??
-        //this.setState({
-        //    inputs: allInputs
-        //});
-
+        // get everybody
         this.getProjectList();
     }
 

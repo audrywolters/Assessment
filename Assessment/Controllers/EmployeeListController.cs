@@ -10,20 +10,19 @@ namespace Assessment.Controllers
     [Route("[controller]")]
     public class EmployeeListController : ControllerBase
     {
-        public IList<Employee> EmployeeList { get; set; }
+        public IList<Employee> EmployeeList;
         public EmployeeListController()
         {
-            // initialize class to have stock employess
-            // we want it to happen once
-            // because users will be adding/deleting employees in front end
-            // don't want to send the original, unedited listEmp
+            // initialize class - supposedly
+            // cannot figure out how to NOT hit this everytime I access
+            // it forgets any new employee I add
             EmployeeList = Employee.GenerateEmployees();
         }
 
         [HttpGet]
         public IList<Employee> Get()
         {
-            // SELECT *
+            // SELECT Name, ...
             // FROM Employees
 
             return EmployeeList;
@@ -32,7 +31,7 @@ namespace Assessment.Controllers
         [HttpGet("{id}")]
         public Employee Get(int id)
         {
-            // SELECT *
+            // SELECT Name, ...
             // FROM Employees
             // WHERE ID = @id
 
@@ -50,6 +49,9 @@ namespace Assessment.Controllers
             Employee foundEmployee = EmployeeList.FirstOrDefault(e => e.ID == newEmployee.ID);
             if (foundEmployee == null)
             {
+                // INSERT INTO Employees (Name ...)
+                // VALUES ('Steven Sondheim' ...);
+
                 // give new employee a "primary key"
                 newEmployee.ID = EmployeeList.Count() + 1;
                 // we are creating
@@ -57,6 +59,10 @@ namespace Assessment.Controllers
             }
             else
             {
+                // UPDATE Employees
+                // SET Name = @name ...
+                // WHERE ID = @id
+
                 // we're updating so replace
                 EmployeeList.Remove(foundEmployee);
                 EmployeeList.Add(newEmployee);
