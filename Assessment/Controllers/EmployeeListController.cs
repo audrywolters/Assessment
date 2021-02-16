@@ -41,7 +41,7 @@ namespace Assessment.Controllers
         }
 
         [HttpPost("{employee}")]
-        public IList<Employee> AddNewEmployeeData(string jsonEmployee)
+        public IList<Employee> UpdateCreateEmployee(string jsonEmployee)
         {
             // turn json string into C# object
             Employee newEmployee = JsonConvert.DeserializeObject<Employee>(jsonEmployee);
