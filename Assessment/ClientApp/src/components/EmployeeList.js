@@ -5,31 +5,15 @@ export class EmployeeList extends Component {
 
     state = {
         employeeList: [],
-        employee: {},
-        isEditMode: false,
-        inputs: []
+        employee: {}
     };
 
     componentDidMount() {
+        // set all inputs in detail form to empty strings
         this.resetEmployeeDetail();
+
+        // calls the server and sets employees into the listing view
         this.getEmployeeList();
-    }
-
-    resetEmployeeDetail() {
-        Array.from(document.querySelectorAll("input")).forEach(
-            input => (input.value = "")
-        );
-        this.setState({
-            employee: [{}]
-        });
-	}
-
-    setEmployeeDetail(emp) {
-        // clear old data
-        this.resetEmployeeDetail();
-
-        // set the employee in the detail view
-        this.setState({ employee: emp })
     }
 
     handleInputChange = (evt) => {
@@ -45,6 +29,25 @@ export class EmployeeList extends Component {
         })
 
         // AUDRY - it would be nice if the changes didn't update in listing
+    }
+
+    resetEmployeeDetail() {
+        // safely retrieve and set input data to empty string
+        Array.from(document.querySelectorAll("input")).forEach(
+            input => (input.value = "")
+        );
+
+        this.setState({
+            employee: [{}]
+        });
+	}
+
+    setEmployeeDetail(emp) {
+        // clear old data
+        this.resetEmployeeDetail();
+
+        // set the employee in the detail view
+        this.setState({ employee: emp })
     }
 
     render() {
@@ -130,5 +133,7 @@ export class EmployeeList extends Component {
         const response = await fetch(`employeeList/${id}`, { method: 'DELETE' });
         const data = await response.json();
         this.setState({ employeeList: data });
+        // clear detail of deleted emp
+        this.resetEmployeeDetail();
     }
 }
