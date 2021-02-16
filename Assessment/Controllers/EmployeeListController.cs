@@ -40,7 +40,7 @@ namespace Assessment.Controllers
             return employee;
         }
 
-        [HttpPost("{employee}")]
+        [HttpPost("{jsonEmployee}")]
         public IList<Employee> UpdateCreateEmployee(string jsonEmployee)
         {
             // turn json string into C# object

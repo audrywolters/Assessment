@@ -95,7 +95,7 @@ export class EmployeeList extends Component {
                     <div className="detailHeader"> 
                         <span>Employee</span>
                         { /* below wont work because of evil onChange business */ }
-                        <button onClick={() => this.addNewEmployeeData(this.state.employee)}>Save</button>
+                        <button onClick={() => this.updateCreateEmployee(this.state.employee)}>Save</button>
                     </div>
 
                     <ul>
