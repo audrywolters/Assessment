@@ -11,13 +11,11 @@ export class EmployeeList extends Component {
     };
 
     componentDidMount() {
-
         this.resetEmployeeDetail();
         this.getEmployeeList();
     }
 
     resetEmployeeDetail() {
-
         Array.from(document.querySelectorAll("input")).forEach(
             input => (input.value = "")
         );
@@ -34,13 +32,12 @@ export class EmployeeList extends Component {
         this.setState({ employee: emp })
     }
 
-    handleInputChange = (e) => {
-
+    handleInputChange = (evt) => {
         // make a copy of employee so state doesn't get upset about immutablity
         let newEmployee = this.state.employee;
 
         // use <input name="foo" as variable so this method works for each input
-        newEmployee[e.target.name] = e.target.value;
+        newEmployee[evt.target.name] = evt.target.value;
 
         // set that state!
         this.setState({
