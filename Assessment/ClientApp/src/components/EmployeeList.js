@@ -23,8 +23,13 @@ export class EmployeeList extends Component {
         this.getEmployeeList();
     }
 
-    setEmployee(e) {
+    resetEmployeeDetail() {
+
+	}
+
+    setEmployeeDetail(emp) {
         // AUDRY - do this properly
+
         // clear old data (or else Elmer's fax will show up on John's)
         //for (let i = 0; i < this.state.inputs.length; i++) {
         //    let input = this.state.inputs[i];
@@ -32,7 +37,7 @@ export class EmployeeList extends Component {
         //}
 
         // set the employee in the detail view
-        this.setState({ employee: e })
+        this.setState({ employee: emp })
     }
 
     // AUDRY - fix
@@ -48,31 +53,20 @@ export class EmployeeList extends Component {
     //    });
     //}
 
-    handleChange = (e) => {
+    handleInputChange = (e) => {
 
+        // make a copy of employee so state doesn't get upset about immutablity
         let newEmployee = this.state.employee;
+
+        // use <input name="foo" as variable so this method works for each input
         newEmployee[e.target.name] = e.target.value;
+
+        // set that state!
         this.setState({
             employee: newEmployee
         })
 
-
-
-        //this.setState(prevState => {
-        //    employee: {
-        //        ...prevState.employee,
-
-        //    })
-
-
-
-        //let inputName = el.target.name;
-        //let inputValue = el.target.value;
-
-        //let employeeCopy = Object.assign({}, tprive);
-        //employeeCopy.formInputs[inputName].value = inputValue;
-
-        //this.setState(employeeCopy);
+        // AUDRY - it would be nice if the changes didn't update in listing
     }
 
     render() {
@@ -96,7 +90,7 @@ export class EmployeeList extends Component {
                                     <td>{emp.name}</td>
                                     <td>{emp.emailDefault}</td>
                                     <td>{emp.phoneDirect}</td>
-                                    <td><button onClick={() => this.setEmployee(emp)}>Edit</button>
+                                    <td><button onClick={() => this.setEmployeeDetail(emp)}>Edit</button>
                                         <button onClick={() => this.deleteEmployee(emp.id)}>Delete</button></td>
                                 </tr>
                             ) }
@@ -112,17 +106,17 @@ export class EmployeeList extends Component {
                     </div>
 
                     <ul>
-                        <li><label>Name:</label>        <input name="name"         onChange={this.handleChange} type="text" value={this.state.employee.name} /></li>
-                        <li><label>Title:</label>       <input name="title"        onChange={this.handleChange} type="text" value={this.state.employee.title} /></li>
-                        <li><label>Direct:</label>      <input name="phoneDirect"  onChange={this.handleChange} type="text" value={this.state.employee.phoneDirect} /></li>
-                        <li><label>Cell:</label>        <input name="phoneCell"    onChange={this.handleChange} type="text" value={this.state.employee.phoneCell} /></li>
-                        <li><label>Home:</label>        <input name="phoneHome"    onChange={this.handleChange} type="text" value={this.state.employee.phoneHome} /></li>
-                        <li><label>Fax:</label>         <input name="faxDefault"   onChange={this.handleChange} type="text" value={this.state.employee.faxDefault} /></li>
-                        <li><label>Home Fax:</label>    <input name="faxHome"      onChange={this.handleChange} type="text" value={this.state.employee.faxHome} /></li>
-                        <li><label>Email:</label>       <input name="emailDefault" onChange={this.handleChange} type="text" value={this.state.employee.emailDefault} /></li>
-                        <li><label>Email Home:</label>  <input name="emailHome"    onChange={this.handleChange} type="text" value={this.state.employee.emailHome} /></li>
-                        { /* checkbox will need a special event handler */ }
-                        <li><label>Is Active:</label>   <input name="isActive" type="checkbox" checked={this.state.employee.isActive} /></li>
+                        <li> <label>Name:</label>        <input name="name"          value={this.state.employee.name}          onChange={this.handleInputChange}  type="text" /> </li>
+                        <li> <label>Title:</label>       <input name="title"         value={this.state.employee.title}         onChange={this.handleInputChange}  type="text" /> </li>
+                        <li> <label>Direct:</label>      <input name="phoneDirect"   value={this.state.employee.phoneDirect}   onChange={this.handleInputChange}  type="text" /> </li>
+                        <li> <label>Cell:</label>        <input name="phoneCell"     value={this.state.employee.phoneCell}     onChange={this.handleInputChange}  type="text" /> </li>
+                        <li> <label>Home:</label>        <input name="phoneHome"     value={this.state.employee.phoneHome}     onChange={this.handleInputChange}  type="text" /> </li>
+                        <li> <label>Fax:</label>         <input name="faxDefault"    value={this.state.employee.faxDefault}    onChange={this.handleInputChange}  type="text" /> </li>
+                        <li> <label>Home Fax:</label>    <input name="faxHome"       value={this.state.employee.faxHome}       onChange={this.handleInputChange}  type="text" /> </li>
+                        <li> <label>Email:</label>       <input name="emailDefault"  value={this.state.employee.emailDefault}  onChange={this.handleInputChange}  type="text" /> </li>
+                        <li> <label>Email Home:</label>  <input name="emailHome"     value={this.state.employee.emailHome}     onChange={this.handleInputChange}  type="text" /> </li>
+                        { /*  checkbox will need a special event handler */ }
+                        <li> <label>Is Active:</label>   <input name="isActive" type="checkbox" checked={this.state.employee.isActive} />                                    </li>
                     </ul>
                 </div>   
             </>
