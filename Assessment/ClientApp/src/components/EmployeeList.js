@@ -12,46 +12,27 @@ export class EmployeeList extends Component {
 
     componentDidMount() {
 
-        let allInputs = document.querySelectorAll("input");
-
-        // AUDRY - react doesn't like this
-        // ...can I leave them uncontrolled??
-        this.setState({
-            inputs: allInputs
-        });
-
+        this.resetEmployeeDetail();
         this.getEmployeeList();
     }
 
     resetEmployeeDetail() {
 
+        Array.from(document.querySelectorAll("input")).forEach(
+            input => (input.value = "")
+        );
+        this.setState({
+            employee: [{}]
+        });
 	}
 
     setEmployeeDetail(emp) {
-        // AUDRY - do this properly
-
-        // clear old data (or else Elmer's fax will show up on John's)
-        //for (let i = 0; i < this.state.inputs.length; i++) {
-        //    let input = this.state.inputs[i];
-        //    input.value = "";
-        //}
+        // clear old data
+        this.resetEmployeeDetail();
 
         // set the employee in the detail view
         this.setState({ employee: emp })
     }
-
-    // AUDRY - fix
-    //handleChange = (evt) => {
-    //    let value = evt.target.value;
-
-    //    // AUDRY - doesn't work either. there has got to be a way to update an object
-    //    // i refuse to add each property to state. that's ridiculous. urg!
-
-    //    let objAndProp = 'employee.' + evt.target.name;
-    //    this.setState({
-    //        [objAndProp]: value
-    //    });
-    //}
 
     handleInputChange = (e) => {
 
@@ -80,8 +61,7 @@ export class EmployeeList extends Component {
                                 <th>Name</th>
                                 <th>Email</th>
                                 <th>Direct</th>
-                                <th><button>New Employee</button></th> 
-                                { /* <th><button onClick={() => this.setEmployee()}>New Employee</button></th> */}
+                                <th><button onClick={() => this.resetEmployeeDetail()}>New Employee</button></th>
                             </tr>
                         </thead>
                         <tbody>
@@ -140,8 +120,8 @@ export class EmployeeList extends Component {
         this.setState({ employee: data });
     }
 
-    // create/update
-    async addNewEmployeeData(employee) {
+    // create/update - i know it's bad to combine the two... but I have some reason...
+    async updateCreateEmployee(employee) {
         let jsonEmployee = JSON.stringify(employee);
         const response = await fetch(`employeeList/${jsonEmployee}`, { method: 'POST' });
         const data = await response.json();
