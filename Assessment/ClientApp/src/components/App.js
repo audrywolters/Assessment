@@ -11,9 +11,9 @@ export default class App extends Component {
             <>
                 {/* navigation in topmost page section */}
                 <nav>
-                    <span>The Weidt Group</span>
                     <Link to="/projectList">Projects</Link>
                     <Link to="/">Employees</Link>
+                    <span>The Weidt Group</span>
                 </nav>
 
                 {/* get to and fro pages */}

@@ -62,15 +62,14 @@ export class ProjectList extends Component {
     render() {
         return (
             <>
-                <h1>Projects</h1>
                 <div className="listing">
+                    <button onClick={() => this.clickNewProject()}>New Project</button>
                     <table>
                         <thead>
                             <tr>
                                 <th>Name</th>
                                 <th>Date</th>
                                 <th>Contact</th>
-                                <th><button onClick={() => this.clickNewProject()}>New Project</button></th>
                             </tr>
                         </thead>
                         <tbody>
@@ -93,7 +92,7 @@ export class ProjectList extends Component {
                         <button onClick={() => this.saveProject(this.state.project)}>Save</button>
                     </div>
 
-                    <ul>
+                    <ul className="detailInputs">
                         <li><label>Name:</label>    <input name="name"     onChange={this.handleInputChange} type="text"  value={this.state.project.name} /></li>
                         <li><label>Date:</label>    <input name="date"     onChange={this.handleInputChange} type="text"  value={this.state.project.date} /></li>
                         <li><label>Contact:</label> <input name="contact"  onChange={this.handleInputChange} type="text"  value={this.state.project.contact} /></li>

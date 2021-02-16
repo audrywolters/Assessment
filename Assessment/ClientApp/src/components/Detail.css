@@ -2,11 +2,15 @@
     display: flex;
     flex-flow: column;
     height: 100%;
+    text-align: right;
 }
 
 .detailHeader div {
     float: left;
 }
+
 .detailHeader button {
     float: right;
 }
+
+

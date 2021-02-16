@@ -1,4 +1,9 @@
 body {
     margin: 0;
     font-family: Avenir, Futura, sans-serif;
+    background-color: white;
+}
+
+h1 {
+    font-size: 1.5em;
 }

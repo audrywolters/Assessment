@@ -82,15 +82,14 @@ export class EmployeeList extends Component {
     render() {
         return (
             <>
-                <h1>Employees</h1>
                 <div className="listing">
+                    <button onClick={() => this.clickNewEmployee()}>New Employee</button>
                     <table>
                         <thead>
                             <tr>
                                 <th>Name</th>
                                 <th>Email</th>
                                 <th>Direct</th>
-                                <th><button onClick={() => this.clickNewEmployee()}>New Employee</button></th>
                             </tr>
                         </thead>
                         <tbody>
