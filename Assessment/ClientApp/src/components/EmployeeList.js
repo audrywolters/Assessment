@@ -83,13 +83,15 @@ export class EmployeeList extends Component {
         return (
             <>
                 <div className="listing">
-                    <button onClick={() => this.clickNewEmployee()}>New Employee</button>
                     <table>
                         <thead>
                             <tr>
                                 <th>Name</th>
                                 <th>Email</th>
                                 <th>Direct</th>
+                                <th>
+                                    <button className="newButton" onClick={() => this.clickNewEmployee()}>New Employee</button>
+                                </th>
                             </tr>
                         </thead>
                         <tbody>
@@ -107,8 +109,7 @@ export class EmployeeList extends Component {
                 </div>
 
                 <div className="detail">
-                    <div className="detailHeader"> 
-                        <span>Employee</span>
+                    <div className="detailHeader">
                         <button onClick={() => this.saveEmployee(this.state.employee)}>Save</button>
                     </div>
 
@@ -121,10 +122,9 @@ export class EmployeeList extends Component {
                         <li> <label>Fax:</label>         <input name="faxDefault"    value={this.state.employee.faxDefault}    onChange={this.handleInputChange}    type="text" />    </li>
                         <li> <label>Home Fax:</label>    <input name="faxHome"       value={this.state.employee.faxHome}       onChange={this.handleInputChange}    type="text" />    </li>
                         <li> <label>Email:</label>       <input name="emailDefault"  value={this.state.employee.emailDefault}  onChange={this.handleInputChange}    type="text" />    </li>
-                        <li> <label>Email Home:</label>  <input name="emailHome"     value={this.state.employee.emailHome}     onChange={this.handleInputChange}    type="text" />    </li>
-                        <li> <label>Is Active:</label>   <input name="isActive"    checked={this.state.employee.isActive}      onChange={this.handleCheckboxChange} type="checkbox"/> </li>
+                        <li> <label>Email Home:</label>  <input name="emailHome" value={this.state.employee.emailHome} onChange={this.handleInputChange} type="text" />    </li>
+                        <li> <label className="checkboxLabel">Is Active:</label>   <input name="isActive" checked={this.state.employee.isActive} onChange={this.handleCheckboxChange} type="checkbox" /> </li>
                     </ul>
-                    {JSON.stringify(this.state.employee)}
                 </div>
 
             </>

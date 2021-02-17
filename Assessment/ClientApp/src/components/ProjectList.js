@@ -63,13 +63,15 @@ export class ProjectList extends Component {
         return (
             <>
                 <div className="listing">
-                    <button onClick={() => this.clickNewProject()}>New Project</button>
                     <table>
                         <thead>
                             <tr>
                                 <th>Name</th>
                                 <th>Date</th>
                                 <th>Contact</th>
+                                <th>
+                                    <button className="newButton" onClick={() => this.clickNewProject()}>New Project</button>
+                                </th>
                             </tr>
                         </thead>
                         <tbody>
@@ -88,8 +90,7 @@ export class ProjectList extends Component {
 
                 <div className="detail">
                     <div className="detailHeader">
-                        <span>Project</span>
-                        <button onClick={() => this.saveProject(this.state.project)}>Save</button>
+                        <button className="saveButton" onClick={() => this.saveProject(this.state.project)}>Save</button>
                     </div>
 
                     <ul className="detailInputs">

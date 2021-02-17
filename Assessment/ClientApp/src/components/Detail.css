@@ -3,6 +3,8 @@
     flex-flow: column;
     height: 100%;
     text-align: right;
+    margin-right: 5em;
+    padding: 2em;
 }
 
 .detailHeader div {
@@ -13,4 +15,24 @@
     float: right;
 }
 
+label {
+    margin-right: 0.75em;
+}
+
+input {
+    width: 15em;
+    margin-bottom: 0.5em;
+}
+
+input[type="checkbox" i] {
+    margin-right: 7.64em;
+}
+
+.checkboxLabel {
+    margin-right: -5.4em;
+}
+
+.saveButton {
+    margin: 0 0 0.5em 0;
+}
 

@@ -27,18 +27,7 @@ namespace Assessment.Controllers
             // FROM Employees
 
             return EmployeeList;
-        } 
-
-        //[HttpGet("{id}")]
-        //public Employee Get(int id)
-        //{
-        //    // SELECT Name, ...
-        //    // FROM Employees
-        //    // WHERE ID = @id
-
-        //    Employee employee = EmployeeList.FirstOrDefault(e => e.ID == id);
-        //    return employee;
-        //}
+        }
 
         [HttpPost("{jsonEmployee}")]
         public IList<Employee> SaveEmployee (string jsonEmployee)
