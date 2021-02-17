@@ -21,7 +21,6 @@ nav a {
 .listing {
     width: 60%;
     float: left;
-    background-color: rgb(170, 170, 170);
 }
 
 h1 {
@@ -30,7 +29,6 @@ h1 {
 }
 .detail {
     margin-left: 40%;
-    background-color: rgb(185, 171, 138);
 }
 
 /* get rid of silly pre-formatting */

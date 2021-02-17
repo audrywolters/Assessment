@@ -110,7 +110,7 @@ export class EmployeeList extends Component {
 
                 <div className="detail">
                     <div className="detailHeader">
-                        <button onClick={() => this.saveEmployee(this.state.employee)}>Save</button>
+                        <button className="saveButton" onClick={() => this.saveEmployee(this.state.employee)}>Save</button>
                     </div>
 
                     <ul>
